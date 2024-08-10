@@ -1,0 +1,44 @@
+# 编译器生成的文件
+*.o
+*.obj
+*.exe
+*.dll
+*.pdb
+*.lib
+*.so
+*.dylib
+
+# 编译器/IDE生成的文件
+out/
+bin/
+obj/
+
+# 包文件
+*.zip
+*.rar
+*.gz
+*.tar
+*.7z
+
+# 日志和临时文件
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Visual Studio生成的文件和文件夹
+[Dd]ebug/
+[Rr]elease/
+*.suo
+*.user
+*.sln.docstates
+*.suo
+*.cache
+*.csproj.user
+.vs/
+
+# macOS/OS X专用文件
+*.DS_Store
+
+# 忽略笔记文档
+/Note/
