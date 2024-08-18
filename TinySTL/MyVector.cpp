@@ -85,7 +85,7 @@ public:
 	//删除数组末尾元素：移除 Vector 末尾的元素
 	void pop_back() {
 		if (size > 0) {
-			return elements[size--];
+			size--;
 		}
 	}
 
@@ -114,7 +114,14 @@ public:
 		if (index < 0 || index >= size) {
 			throw std::out_of_range("Index out of range");
 		}
+		if (size == capacity) {
+			reserve(capacity == 0 ? 1 : capacity * 2);
+		}
+		for (size_t i = size; i > index; --i) {
+			elements[i] = elements[i - 1];
+		}
 		elements[index] = element;
+		++size;
 	}
 
 	//清空数组：删除 Vector 中的所有元素，重置其状态
