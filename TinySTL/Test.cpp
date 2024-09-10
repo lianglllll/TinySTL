@@ -1,7 +1,8 @@
 #include "MyVector.cpp"
 #include "MyList.cpp"
-#include<iostream>
-using namespace std;
+#include "MyPriority_queue.cpp"
+#include "MyDeque.cpp"
+
 
 
 void TestVector() {
@@ -118,7 +119,7 @@ void TestList() {
 
 			if (command == "size") {
 				std::cout << myList.getSize() << std::endl;
-			}
+			}	
 
 			if (command == "get") {
 				iss >> value;
@@ -143,15 +144,134 @@ void TestList() {
 }
 
 void TestPriority_queue() {
+	// 使用 std::vector 作为底层容器
+	MyPriority_queue<int, std::vector<int>> myPriorityQueue;
+
+	std::string line;
+	while (true) {
+		std::getline(std::cin, line);
+		std::istringstream iss(line);
+		std::string command;
+		iss >> command;
+
+		int element;
+
+		if (command == "push") {
+			iss >> element;
+			myPriorityQueue.push(element);
+		}
+
+		if (command == "pop") {
+			try {
+				myPriorityQueue.pop();
+			}
+			catch (const std::runtime_error& e) {
+				// 不做任何处理
+				continue;
+			}
+		}
+
+		if (command == "top") {
+			try {
+				std::cout << myPriorityQueue.top() << std::endl;
+			}
+			catch (const std::runtime_error& e) {
+				std::cout << "null" << std::endl;
+			}
+		}
+
+		if (command == "size") {
+			std::cout << myPriorityQueue.size() << std::endl;
+		}
+
+		if (command == "empty") {
+			std::cout << (myPriorityQueue.empty() ? "true" : "false") << std::endl;
+		}
+
+		if (command == "quit") {
+			break;
+		}
+
+	}
+}
+
+void TestDeque() {
+	// 创建一个 Deque 对象
+	MyDeque<int> myDeque;
+
+	int N;
+	std::cin >> N;
+	// 读走回车
+	getchar();
+	std::string line;
+
+	// 接收命令
+	for (int i = 0; i < N; i++) {
+
+		try
+		{
+			std::getline(std::cin, line);
+			std::istringstream iss(line);
+			std::string command;
+			iss >> command;
+			int value;
+
+			if (command == "push_back") {
+				iss >> value;
+				myDeque.push_back(value);
+			}
+
+			if (command == "push_front") {
+				iss >> value;
+				myDeque.push_front(value);
+			}
+
+			if (command == "pop_back") {
+
+				myDeque.pop_back();
+			}
+
+			if (command == "pop_front") {
+
+				myDeque.pop_front();
+			}
+
+			if (command == "clear") {
+				myDeque.clear();
+			}
+
+			if (command == "size") {
+				std::cout << myDeque.getSize() << std::endl;
+			}
+
+			if (command == "get") {
+				iss >> value;
+				std::cout << myDeque[value] << std::endl;
+			}
+
+			if (command == "print") {
+				if (myDeque.getSize() == 0) {
+					std::cout << "empty" << std::endl;
+				}
+				else {
+					myDeque.printElements();
+				}
+			}
+		}
+		catch (const std::exception& e)
+		{
+			cout << e.what() << endl;
+		}
+
+
+	}
 
 }
 
 
 int main(){
 	//TestVector();
-	TestList();
+	//TestList();
+	//TestPriority_queue();
+	TestDeque();
 }
-
-
-
-

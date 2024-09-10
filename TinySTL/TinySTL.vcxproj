@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MyDeque.cpp" />
     <ClCompile Include="MyList.cpp" />
     <ClCompile Include="MyPriority_queue.cpp" />
     <ClCompile Include="MyVector.cpp" />
