@@ -1,8 +1,6 @@
 #include <iostream>
+#include <vector>
 using namespace std;
-#include <string>
-#include <stdexcept>
-#include <algorithm>
 
 template<typename T>
 class MyList {

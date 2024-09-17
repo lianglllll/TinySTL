@@ -1,9 +1,8 @@
 #include <iostream>
-#include <algorithm>
-#include <sstream>
-#include <string>
 #include <stdexcept>
 #include <vector>
+using namespace std;
+
 
 template<typename T,typename Container = std::vector<T>>
 class MyPriority_queue {
