@@ -3,11 +3,7 @@
 #include "MyPriority_queue.cpp"
 #include "MyDeque.cpp"
 #include "MyHashTable.cpp"
-
-#include <algorithm>
-#include <sstream>
-#include <string>
-
+#include "MyRedBlackTree.cpp"
 
 void TestVector() {
 
@@ -18,8 +14,8 @@ void TestVector() {
 	v1.push_back(4);
 	v1.push_back(5);
 
-	cout <<"元素个数：" << v1.getSize() << endl;
-	cout <<"容量大小：" << v1.getCapacity() << endl;
+	cout << "元素个数：" << v1.getSize() << endl;
+	cout << "容量大小：" << v1.getCapacity() << endl;
 	v1.print();
 	cout << endl << endl;
 
@@ -123,7 +119,7 @@ void TestList() {
 
 			if (command == "size") {
 				std::cout << myList.getSize() << std::endl;
-			}	
+			}
 
 			if (command == "get") {
 				iss >> value;
@@ -337,11 +333,72 @@ void TestHashTable() {
 	}
 }
 
+void TestRedBlackTree() {
+	// 创建红黑树实例
+	MyRedBlackTree<int, int> rbTree;
 
-int main(){
-	//TestVector();
-	//TestList();
-	//TestPriority_queue();
-	//TestDeque();
-	TestHashTable();
+	int N;
+	std::cin >> N;
+	getchar();
+
+	std::string line;
+	for (int i = 0; i < N; i++)
+	{
+		std::getline(std::cin, line);
+		std::istringstream iss(line);
+		std::string command;
+		iss >> command;
+
+		int key;
+		int value;
+
+		if (command == "insert")
+		{
+			iss >> key >> value;
+			rbTree.Insert(key, value);
+		}
+
+		if (command == "size")
+		{
+			std::cout << rbTree.GetSize() << std::endl;
+		}
+
+		if (command == "at")
+		{
+			iss >> key;
+			int* res = rbTree.At(key);
+			if (res == nullptr)
+			{
+				std::cout << "not exist" << std::endl;
+			}
+			else
+			{
+				std::cout << *res << std::endl;
+			}
+		}
+
+		if (command == "remove")
+		{
+			iss >> key;
+			rbTree.Remove(key);
+		}
+
+		if (command == "print")
+		{
+			if (rbTree.Empty())
+			{
+				std::cout << "empty" << std::endl;
+			}
+			else
+			{
+				rbTree.print();
+			}
+		}
+	}
+}
+
+
+
+int main() {
+	TestRedBlackTree();
 }

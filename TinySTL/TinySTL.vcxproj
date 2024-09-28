@@ -131,6 +131,7 @@
     <ClCompile Include="MyHashTable.cpp" />
     <ClCompile Include="MyList.cpp" />
     <ClCompile Include="MyPriority_queue.cpp" />
+    <ClCompile Include="MyRedBlackTree.cpp" />
     <ClCompile Include="MyVector.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>

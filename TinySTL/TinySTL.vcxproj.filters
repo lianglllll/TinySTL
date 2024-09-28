@@ -33,5 +33,8 @@
     <ClCompile Include="MyHashTable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MyRedBlackTree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
