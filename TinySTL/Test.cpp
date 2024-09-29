@@ -1,9 +1,14 @@
+#pragma once 
 #include "MyVector.cpp"
 #include "MyList.cpp"
 #include "MyPriority_queue.cpp"
 #include "MyDeque.cpp"
 #include "MyHashTable.cpp"
 #include "MyRedBlackTree.cpp"
+#include "MySet.cpp"
+#include "Myunordered_set.cpp"
+#include "MyMultiSet.cpp"
+
 
 void TestVector() {
 
@@ -397,8 +402,126 @@ void TestRedBlackTree() {
 	}
 }
 
+void TestSet() {
+	MySet<int> mySet;
+
+	// 插入元素
+	mySet.Insert(10);
+	mySet.Insert(20);
+	mySet.Insert(20);
+	mySet.Insert(30);
+
+	// 打印集合大小
+	std::cout << "当前集合的大小: " << mySet.Size() << std::endl;
+
+	// 检查集合是否包含特定元素
+	int keyToCheck = 20;
+	std::cout << "集合是否包含元素" << keyToCheck << ": "
+		<< (mySet.Contains(keyToCheck) ? "是" : "否") << std::endl;
+
+	// 删除元素
+	int keyToDelete = 20;
+	mySet.Erase(keyToDelete);
+	std::cout << "删除元素" << keyToDelete
+		<< "后，当前集合的大小: " << mySet.Size() << std::endl;
+
+	// 再次检查集合是否包含已删除的元素
+	std::cout << "删除元素" << keyToDelete << "后，集合是否包含元素"
+		<< keyToDelete << ": " << (mySet.Contains(keyToCheck) ? "是" : "否")
+		<< std::endl;
+
+	// 检查集合是否为空
+	std::cout << "集合是否为空: " << (mySet.Empty() ? "是" : "否") << std::endl;
+
+}
+
+void Testunordered_set() {
+	// 创建一个整数类型的 Unordered_set 集合
+	Myunordered_set<int> intSet;
+
+	// 插入一些数字
+	intSet.Insert(1);
+	intSet.Insert(2);
+	intSet.Insert(2);
+	intSet.Insert(3);
+
+	// 检查集合是否为空
+	std::cout << "集合是否为空? " << (intSet.Empty() ? "是" : "否") << std::endl;
+
+	// 检查集合的大小
+	std::cout << "集合的大小: " << intSet.Size() << std::endl;
+
+	// 查找一个元素
+	std::cout << "2 是否在集合中? " << (intSet.Contains(2) ? "是" : "否")
+		<< std::endl;
+
+	// 删除一个元素
+	intSet.Erase(2);
+	std::cout << "删除 2 后，2 是否还在集合中? " << (intSet.Contains(2) ? "是" : "否")
+		<< std::endl;
+
+	// 清空集合
+	intSet.Clear();
+	std::cout << "清空后集合是否为空? " << (intSet.Empty() ? "是" : "否")
+		<< std::endl;
+
+	// 创建一个字符串类型的 Unordered_set 集合
+	Myunordered_set<std::string> stringSet;
+
+	// 插入一些字符串
+	stringSet.Insert("apple");
+	stringSet.Insert("banana");
+	stringSet.Insert("banana");
+	stringSet.Insert("cherry");
+
+	// 查找一个字符串
+	std::cout << "'banana' 是否在集合中? "
+		<< (stringSet.Contains("banana") ? "是" : "否") << std::endl;
+
+	// 删除一个字符串
+	stringSet.Erase("banana");
+	std::cout << "删除 'banana' 后，'banana' 是否还在集合中? "
+		<< (stringSet.Contains("banana") ? "是" : "否") << std::endl;
+
+	return ;
+}
+
+void TestMultiSet() {
+	MyMultiSet<int> mySet; // Create an Unordered_set for integers
+
+	// Insert some elements
+	mySet.Insert(1);
+	mySet.Insert(2);
+	mySet.Insert(2);
+	mySet.Insert(3);
+
+	// Check if elements are in the set
+	std::cout << "Does the set contain 1? " << (mySet.Count(1) > 0 ? "Yes" : "No")
+		<< std::endl;
+	std::cout << "Does the set contain 4? " << (mySet.Count(4) > 0 ? "Yes" : "No")
+		<< std::endl;
+
+	// Print the size of the set
+	std::cout << "The set size is: " << mySet.Size() << std::endl;
+
+	// Remove an element
+	mySet.Erase(2);
+	std::cout << "After erasing 2, does the set contain 2? "
+		<< (mySet.Count(2) > 0 ? "Yes" : "No") << std::endl;
+	std::cout << "The set size is now: " << mySet.Size() << std::endl;
+
+	// Clear the set
+	mySet.Clear();
+	std::cout << "After clearing, is the set empty? "
+		<< (mySet.Empty() ? "Yes" : "No") << std::endl;
+
+	return;
+}
 
 
 int main() {
-	TestRedBlackTree();
+	//TestRedBlackTree();
+	//TestSet();
+	//Testunordered_set();
+	TestMultiSet();
 }

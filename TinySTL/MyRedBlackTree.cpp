@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <iostream>
@@ -36,7 +37,7 @@ public:
 	}
 	~MyRedBlackTree() {
 		//释放节点内存
-		DeleteTree(root);
+		Clear();
 	}
 	void Insert(const Key& key, const Value& value) {
 		InsertNode(key, value);
@@ -63,6 +64,7 @@ public:
 	}
 	void Clear() {
 		DeleteTree(root);
+		root = nullptr;
 		size = 0;
 	}
 	void print() {

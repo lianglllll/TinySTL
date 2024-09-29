@@ -36,5 +36,14 @@
     <ClCompile Include="MyRedBlackTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MySet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Myunordered_set.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMultiset.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
