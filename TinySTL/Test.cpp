@@ -8,6 +8,11 @@
 #include "MySet.cpp"
 #include "Myunordered_set.cpp"
 #include "MyMultiSet.cpp"
+#include "MyMap.cpp"
+#include "Myunordered_map.cpp"
+#include "MyMultiMap.cpp"
+#include "MyStack.cpp"
+#include "MyQueue.cpp"
 
 
 void TestVector() {
@@ -518,10 +523,242 @@ void TestMultiSet() {
 	return;
 }
 
+void TestMap() {
+	MyMap<int, std::string> map;
+
+	// 插入键值对
+	map.Insert(1, "Apple");
+	map.Insert(2, "Banana");
+	map.Insert(3, "Cherry");
+
+	// 打印大小
+	std::cout << "当前Map的大小: " << map.Size() << std::endl;
+
+	// 访问元素
+	try {
+		std::cout << "键1对应的值: " << map.At(1) << std::endl;
+		std::cout << "键2对应的值: " << map.At(2) << std::endl;
+	}
+	catch (const std::out_of_range& e) {
+		std::cerr << "错误: " << e.what() << std::endl;
+	}
+
+	// 检查是否包含某个键
+	int keyToCheck = 3;
+	std::cout << "Map是否包含键" << keyToCheck << ": "
+		<< (map.Contains(keyToCheck) ? "是" : "否") << std::endl;
+
+	// 使用[]运算符访问或创建元素
+	std::cout << "键4对应的值（在此之前不存在，将被创建）: " << map[4]
+		<< std::endl;
+
+	// 删除元素
+	int keyToDelete = 2;
+	std::cout << "删除键" << keyToDelete << std::endl;
+	map.Erase(keyToDelete);
+
+	// 再次打印大小
+	std::cout << "删除键" << keyToDelete << "后，当前Map的大小: " << map.Size()
+		<< std::endl;
+
+	// 使用[]运算符为元素赋值
+	map[4] = "Pear";
+	std::cout << "键4对应的值: " << map[4] << '\n';
+	return ;
+}
+
+void TestUnordered_map() {
+	// 创建一个 Unordered_map，键和值都是 std::string 类型
+	Myunordered_map<std::string, std::string> map;
+
+	// 插入一些键值对
+	map.Insert("apple", "苹果");
+	map.Insert("banana", "香蕉");
+	map.Insert("cherry", "樱桃");
+
+	// 检查映射是否为空
+	std::cout << "映射是否为空? " << (map.Empty() ? "是" : "否") << std::endl;
+
+	// 获取映射的大小
+	std::cout << "映射的大小: " << map.Size() << std::endl;
+
+	// 访问元素
+	std::cout << "apple 对应的中文是: " << map["apple"] << std::endl;
+
+	// 修改元素
+	map["apple"] = "红苹果";
+	std::cout << "修改后 apple 对应的中文是: " << map["apple"] << std::endl;
+
+	// 使用 [] 操作符插入新的键值对
+	map["orange"] = "橙子";
+	std::cout << "orange 对应的中文是: " << map["orange"] << std::endl;
+
+	// 查找元素
+	std::cout << "cherry 是否在映射中? " << (map.Contains("cherry") ? "是" : "否")
+		<< std::endl;
+
+	// 删除元素
+	map.Erase("banana");
+	std::cout << "删除 banana 后，banana 是否还在映射中? "
+		<< (map.Contains("banana") ? "是" : "否") << std::endl;
+
+	// 清空映射
+	map.Clear();
+	std::cout << "清空后映射是否为空? " << (map.Empty() ? "是" : "否")
+		<< std::endl;
+
+	return ;
+}
+
+void TestMultimap() {
+	// 创建一个MultiMap实例，键的类型是std::string，值的类型是int
+	MyMultiMap<std::string, int> myMultiMap;
+
+	// 插入一些键值对
+	myMultiMap.Insert("apple", 10);
+	myMultiMap.Insert("banana", 20);
+	myMultiMap.Insert("apple", 30); // "apple"可以有多个值
+
+	// 获取并打印键"apple"的所有值
+	auto appleValues = myMultiMap.At("apple");
+	if (appleValues) {
+		std::cout << "Values for 'apple':";
+		for (const auto& val : *appleValues) {
+			std::cout << val << ", ";
+		}
+		std::cout << '\n';
+	}
+
+	// 从MultiMap中移除键"banana"的所有值
+	myMultiMap.Erase("banana");
+
+	// 从MultiMap中移除键"apple"的值30
+	myMultiMap.Erase("apple", 30);
+
+	// 检查MultiMap是否为空
+	if (!myMultiMap.Empty()) {
+		std::cout << "The MultiMap is not empty, it has " << myMultiMap.Size()
+			<< " elements." << std::endl;
+	}
+
+	return ;
+}
+
+void TestStack() {
+	// 使用 std::deque 作为底层容器的示例
+	MyStack<int, MyDeque<int>> stack;
+
+	int N;
+	std::cin >> N;
+	getchar();
+
+	std::string line;
+	for (int i = 0; i < N; i++) {
+		std::getline(std::cin, line);
+		std::istringstream iss(line);
+		std::string command;
+		iss >> command;
+		int element;
+		if (command == "push") {
+			iss >> element;
+ 			stack.push(element);
+		}
+		if (command == "pop") {
+			try {
+				stack.pop();
+			}
+			catch (const std::runtime_error& e) {
+				// 不做任何处理
+				continue;
+			}
+		}
+		if (command == "top") {
+			try {
+				std::cout << stack.top() << std::endl;
+			}
+			catch (const std::runtime_error& e) {
+				std::cout << "null" << std::endl;
+			}
+		}
+		if (command == "size") {
+			std::cout << stack.size() << std::endl;
+		}
+		if (command == "empty") {
+			std::cout << (stack.empty() ? "true" : "false") << std::endl;
+		}
+	}
+	return ;
+}
+
+void TestQueue() {
+	// 使用 std::deque 作为底层容器的示例
+	MyQueue<int, MyDeque<int>> myQueue;
+
+	int N;
+	std::cin >> N;
+	getchar();
+	std::string line;
+
+	for (int i = 0; i < N; i++) {
+		std::getline(std::cin, line);
+		std::istringstream iss(line);
+		std::string command;
+		iss >> command;
+
+		int element;
+
+		if (command == "push") {
+			iss >> element;
+			myQueue.push(element);
+		}
+
+		if (command == "pop") {
+			try {
+				myQueue.pop();
+			}
+			catch (const std::runtime_error& e) {
+				// 不做任何处理
+				continue;
+			}
+		}
+
+		if (command == "front") {
+			try {
+				std::cout << myQueue.front() << std::endl;
+			}
+			catch (const std::runtime_error& e) {
+				std::cout << "null" << std::endl;
+			}
+		}
+
+		if (command == "back") {
+			try {
+				std::cout << myQueue.back() << std::endl;
+			}
+			catch (const std::runtime_error& e) {
+				std::cout << "null" << std::endl;
+			}
+		}
+
+		if (command == "size") {
+			std::cout << myQueue.size() << std::endl;
+		}
+
+		if (command == "empty") {
+			std::cout << (myQueue.empty() ? "true" : "false") << std::endl;
+		}
+	}
+	return;
+}
 
 int main() {
 	//TestRedBlackTree();
 	//TestSet();
 	//Testunordered_set();
-	TestMultiSet();
+	//TestMultiSet();
+	//TestMap();
+	//TestUnordered_map();
+	//TestMultimap();
+	//TestStack();
+	TestQueue();
 }

@@ -45,8 +45,8 @@ public:
 			resize();
 		}
 
-		elements[backIndex] = value;
 		backIndex = (backIndex + 1) % capacity;
+		elements[backIndex] = value;
 		++size;
 	
 	}
@@ -80,8 +80,24 @@ public:
 		return elements[(frontIndex + index) % capacity];
 	}
 
+	T& front() {
+		if (!empty()) {
+			return elements[frontIndex];
+		}
+	}
+
+	T& back() {
+		if (!empty()) {
+			return elements[backIndex];
+		}
+	}
+
 	size_t getSize() {
 		return size;
+	}
+
+	bool empty() {
+		return size == 0;
 	}
 
 	void clear() {
@@ -117,9 +133,7 @@ private:
 		elements = newElements;
 		capacity = newCapacity;
 		frontIndex = 0;
-		backIndex = size;
+		backIndex = size-1;
 
 	}
-
-
 };
